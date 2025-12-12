@@ -1,0 +1,63 @@
+version: 1
+metadata:
+  generated_at: 2024-01-03T00:00:00Z
+  host: lab-node
+  kernel: 5.14.0
+  tool_version: 0.1
+hardware:
+  sockets: 2
+  cores_per_socket: 16
+  threads_per_core: 2
+  numa_nodes: 2
+  nics:
+    - p1p1
+    - p1p2
+cpu:
+  governor:
+    target: performance
+  isolate_cores: "TODO: set isolated cores per NUMA node"
+kernel:
+  cmdline:
+    isolcpus: "TODO: match isolated cores"
+    nohz_full: "TODO: match isolated cores"
+    rcu_nocbs: "TODO: match isolated cores"
+    mitigations: "off (set true only if policy allows)"
+memory:
+  thp_runtime: never
+  swap_disable: true
+  numa_balancing: false
+  ksm: false
+  hugepages:
+    size_kb: 2048
+    total: 8192
+    per_node:
+      node0: 4096
+      node1: 4096
+network:
+  defaults:
+    disable_gro: true
+    disable_lro: true
+    disable_tso: true
+    disable_gso: true
+  interfaces:
+    - name: p1p1
+      role: trading
+    - name: p1p2
+      role: management
+irq:
+  manual_affinity:
+    - match: p1p1-TxRx*
+      cpus: [0, 1, 16, 17]
+  avoid_cores_for_irqs: "TODO: avoid trading cores"
+time_sync:
+  ntp: true
+  ptp:
+    interface: p1p1
+    phc2sys: true
+services:
+  irqbalance: false
+  tuned: latency-performance
+safety:
+  allow_grub_edit: false
+  allow_dangerous_mitigations: false
+recommendations: []

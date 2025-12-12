@@ -1,0 +1,70 @@
+version: 1
+metadata:
+  generated_at: 2024-01-02T00:00:00Z
+  host: hft-gw02
+  kernel: 5.14.0-427.13.1.el9_4.x86_64
+  tool_version: 0.1
+hardware:
+  sockets: 2
+  cores_per_socket: 24
+  threads_per_core: 2
+  numa_nodes: 4
+  nics:
+    - enp177s0f0
+    - enp177s0f1
+    - enp3s0f0np0
+cpu:
+  governor:
+    target: performance
+  isolate_cores: 4-15,28-39,52-63,76-87
+kernel:
+  cmdline:
+    isolcpus: 4-15,28-39,52-63,76-87
+    nohz_full: 4-15,28-39,52-63,76-87
+    rcu_nocbs: 4-15,28-39,52-63,76-87
+    mitigations: off
+memory:
+  thp_runtime: never
+  swap_disable: true
+  numa_balancing: false
+  ksm: false
+  hugepages:
+    size_kb: 2048
+    total: 16384
+    per_node:
+      node0: 4096
+      node1: 4096
+      node2: 4096
+      node3: 4096
+network:
+  defaults:
+    disable_gro: true
+    disable_lro: true
+    disable_tso: true
+    disable_gso: true
+  interfaces:
+    - name: enp177s0f0
+      role: market-data
+    - name: enp177s0f1
+      role: order-entry
+    - name: enp3s0f0np0
+      role: management
+irq:
+  manual_affinity:
+    - match: enp177s0f0-TxRx*
+      cpus: [0, 1, 2, 3, 24, 25, 26, 27]
+    - match: enp177s0f1-TxRx*
+      cpus: [48, 49, 50, 51, 72, 73, 74, 75]
+  avoid_cores_for_irqs: 4-15,28-39,52-63,76-87
+time_sync:
+  ntp: false
+  ptp:
+    interface: enp177s0f0
+    phc2sys: true
+services:
+  irqbalance: false
+  tuned: latency-performance
+safety:
+  allow_grub_edit: true
+  allow_dangerous_mitigations: false
+recommendations: []

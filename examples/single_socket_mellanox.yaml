@@ -1,0 +1,63 @@
+version: 1
+metadata:
+  generated_at: 2024-01-01T00:00:00Z
+  host: sample-trader01
+  kernel: 5.14.0-427.13.1.el9_4.x86_64
+  tool_version: 0.1
+hardware:
+  sockets: 1
+  cores_per_socket: 16
+  threads_per_core: 2
+  numa_nodes: 2
+  nics:
+    - ens1f0
+    - ens1f1
+cpu:
+  governor:
+    target: performance
+  isolate_cores: 2-7,18-23
+kernel:
+  cmdline:
+    isolcpus: 2-7,18-23
+    nohz_full: 2-7,18-23
+    rcu_nocbs: 2-7,18-23
+    mitigations: off
+memory:
+  thp_runtime: never
+  swap_disable: true
+  numa_balancing: false
+  ksm: false
+  hugepages:
+    size_kb: 2048
+    total: 4096
+    per_node:
+      node0: 2048
+      node1: 2048
+network:
+  defaults:
+    disable_gro: true
+    disable_lro: true
+    disable_tso: true
+    disable_gso: true
+  interfaces:
+    - name: ens1f0
+      role: trading
+    - name: ens1f1
+      role: backup
+irq:
+  manual_affinity:
+    - match: ens1f0-TxRx*
+      cpus: [0,1,16,17]
+  avoid_cores_for_irqs: 2-7,18-23
+time_sync:
+  ntp: false
+  ptp:
+    interface: ens1f0
+    phc2sys: true
+services:
+  irqbalance: false
+  tuned: latency-performance
+safety:
+  allow_grub_edit: true
+  allow_dangerous_mitigations: false
+recommendations: []
