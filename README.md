@@ -4,7 +4,7 @@
 
 ![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Version](https://img.shields.io/badge/version-0.1.0-green.svg)
+![Version](https://img.shields.io/badge/version-0.1.1-green.svg)
 ![PyPI](https://img.shields.io/pypi/v/lltune.svg)
 
 ---
@@ -1157,16 +1157,16 @@ journalctl -u lltune-workqueue
 
 ### Project Documentation
 
-- [BIOS Tuning Guide](docs/BIOS_GUIDE.md) - Firmware/BIOS settings for low latency
-- [Configuration Schema](docs/SCHEMA.md) - Complete config field reference
-- [Operations Guide](docs/OPS_GUIDE.md) - Operational procedures
-- [Rollback Guide](docs/ROLLBACK.md) - Backup and rollback procedures
+- [BIOS Tuning Guide](https://github.com/nawaz1991/lltune/blob/main/docs/BIOS_GUIDE.md) - Firmware/BIOS settings for low latency
+- [Configuration Schema](https://github.com/nawaz1991/lltune/blob/main/docs/SCHEMA.md) - Complete config field reference
+- [Operations Guide](https://github.com/nawaz1991/lltune/blob/main/docs/OPS_GUIDE.md) - Operational procedures
+- [Rollback Guide](https://github.com/nawaz1991/lltune/blob/main/docs/ROLLBACK.md) - Backup and rollback procedures
 
 ---
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/nawaz1991/lltune/blob/main/LICENSE) file for details.
 
 ---
 
